@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKD Prediction - Patient Data</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #d804aa 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2.2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 6px rgba(102, 126, 234, 0.6);
+        }
+
+        .section-title {
+            grid-column: 1 / -1;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.3rem;
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 1rem;
+            background: #667eea;
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #5563d6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/predict_page">Predict</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="form-box">
+            <h1 class="form-title">CKD Prediction - Patient Data</h1>
+            <form action="/predict" method="POST" class="form-grid">
+
+                <h3 class="section-title">Basic Information</h3>
+                <div class="form-group">
+                    <label>Age (years)</label>
+                    <input type="number" name="age" min="1" max="120" value="30" required>
+                </div>
+                <div class="form-group">
+                    <label>Blood Pressure (mmHg)</label>
+                    <input type="number" name="blood_pressure" min="50" max="250" value="80" required>
+                </div>
+
+                <h3 class="section-title">Urine Tests</h3>
+                <div class="form-group">
+                    <label>Specific Gravity</label>
+                    <input type="number" name="specific_gravity" min="1.000" max="1.050" step="0.001" value="1.025" required>
+                </div>
+                <div class="form-group">
+                    <label>Albumin</label>
+                    <select name="albumin" required>
+                        <option value="0">0 - Normal</option>
+                        <option value="1">1 - Trace</option>
+                        <option value="2">2 - Small</option>
+                        <option value="3">3 - Moderate</option>
+                        <option value="4">4 - Large</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sugar</label>
+                    <select name="sugar" required>
+                        <option value="0">0 - Normal</option>
+                        <option value="1">1 - Trace</option>
+                        <option value="2">2 - Small</option>
+                        <option value="3">3 - Moderate</option>
+                        <option value="4">4 - Large</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Red Blood Cells</label>
+                    <select name="red_blood_cells" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pus Cell</label>
+                    <select name="pus_cell" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pus Cell Clumps</label>
+                    <select name="pus_cell_clumps" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Bacteria</label>
+                    <select name="bacteria" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+
+                <h3 class="section-title">Blood Tests</h3>
+                <div class="form-group">
+                    <label>Blood Glucose Random (mg/dL)</label>
+                    <input type="number" name="blood_glucose_random" min="50" max="500" value="85" required>
+                </div>
+                <div class="form-group">
+                    <label>Blood Urea (mg/dL)</label>
+                    <input type="number" name="blood_urea" min="5" max="200" value="15" required>
+                </div>
+                <div class="form-group">
+                    <label>Serum Creatinine (mg/dL)</label>
+                    <input type="number" name="serum_creatinine" min="0.1" max="20" step="0.1" value="0.7" required>
+                </div>
+                <div class="form-group">
+                    <label>Sodium (mEq/L)</label>
+                    <input type="number" name="sodium" min="120" max="160" value="145" required>
+                </div>
+                <div class="form-group">
+                    <label>Potassium (mEq/L)</label>
+                    <input type="number" name="potassium" min="2" max="8" step="0.1" value="4.5" required>
+                </div>
+                <div class="form-group">
+                    <label>Hemoglobin (g/dL)</label>
+                    <input type="number" name="hemoglobin" min="5" max="20" step="0.1" value="15.0" required>
+                </div>
+                <div class="form-group">
+                    <label>Packed Cell Volume (%)</label>
+                    <input type="number" name="packed_cell_volume" min="20" max="60" value="48" required>
+                </div>
+                <div class="form-group">
+                    <label>White Blood Cell Count (cells/cmm)</label>
+                    <input type="number" name="white_blood_cell_count" min="2000" max="20000" value="8000" required>
+                </div>
+                <div class="form-group">
+                    <label>Red Blood Cell Count (million/cmm)</label>
+                    <input type="number" name="red_blood_cell_count" min="2" max="8" step="0.1" value="5.5" required>
+                </div>
+
+                <h3 class="section-title">Medical History</h3>
+                <div class="form-group">
+                    <label>Hypertension</label>
+                    <select name="hypertension" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Diabetes Mellitus</label>
+                    <select name="diabetes_mellitus" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Coronary Artery Disease</label>
+                    <select name="coronary_artery_disease" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Appetite</label>
+                    <select name="appetite" required>
+                        <option value="good">Good</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pedal Edema</label>
+                    <select name="pedal_edema" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Anemia</label>
+                    <select name="anemia" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Predict CKD Risk</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CKD Prediction System. Built with Machine Learning for Better Healthcare.</p>
+    </footer>
+</body>
+</html>

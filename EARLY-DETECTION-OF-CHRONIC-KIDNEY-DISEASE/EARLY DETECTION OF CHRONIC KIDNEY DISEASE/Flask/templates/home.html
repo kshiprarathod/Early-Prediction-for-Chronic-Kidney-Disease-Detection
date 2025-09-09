@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CKD Prediction System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f7fb;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #0077b6;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .navbar a:hover {
+      opacity: 0.8;
+    }
+
+    /* Hero Section */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #023e8a;
+    }
+
+    .hero p {
+      max-width: 700px;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: #0096c7;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #0077b6;
+    }
+
+    .btn-secondary {
+      border: 2px solid #0096c7;
+      color: #0096c7;
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background-color: #0096c7;
+      color: white;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .feature {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature h3 {
+      margin-bottom: 1rem;
+      color: #023e8a;
+    }
+
+    .feature p {
+      color: #555;
+    }
+
+    /* Footer */
+    .footer {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">CKD Predictor</div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/predict_page">Predict</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Chronic Kidney Disease Prediction</h1>
+    <p>Empowering healthcare with AI-driven predictions. Get early insights into CKD risk factors and take control of your health today.</p>
+    <div class="cta-buttons">
+      <a href="/predict_page" class="btn btn-primary">Start Prediction</a>
+      <a href="/about" class="btn btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>🩺 Early Detection</h3>
+      <p>Identify CKD in its early stages with routine test data and timely intervention.</p>
+    </div>
+    <div class="feature">
+      <h3>🤖 AI-Powered Analysis</h3>
+      <p>Leverages machine learning models trained on medical datasets for accurate predictions.</p>
+    </div>
+    <div class="feature">
+      <h3>📊 Health Management</h3>
+      <p>Helps patients and healthcare providers track risk levels and plan treatment strategies.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 CKD Prediction System | Powered by Machine Learning</p>
+  </footer>
+</body>
+</html>
